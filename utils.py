@@ -365,7 +365,6 @@ def remove_escapes(text: str) -> str:
             res += text[counter]
     return res
 
-
 def humanbytes(size):
     if not size:
         return ""
@@ -379,22 +378,5 @@ def humanbytes(size):
 
 
 
-####################  Dulink  ####################
 
-async def get_shortlink(link):
-    https = link.split(":")[0]
-    if "http" == https:
-        https = "https"
-        link = link.replace("http", https)
-    url = f'https://du-link.in/api'
-    params = {'api': '5486d155f5186ac5e5bf128f8a54d72fe3680a28',
-              'url': link,
-              }
 
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
-            data = await response.json()
-            if data["status"] == "success":
-                return data['shortenedUrl']
-            else:
-                return f"Error: {data['message']}"
